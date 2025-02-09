@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-               git branch: 'main', url: 'https://github.com/devops-cicd-team/Boardgame.git'
+               git branch: 'main', url: 'https://github.com/MisbaHashimT/ci-cd.git'
             }
         }
         
@@ -67,7 +67,7 @@ pipeline {
             steps {
                script {
                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                            sh "docker build -t aashishanil/boardshack:latest ."
+                            sh "docker build -t misbahashim/bgame:latest ."
                     }
                }
             }
@@ -75,7 +75,7 @@ pipeline {
         
         stage('Docker Image Scan') {
             steps {
-                sh "trivy image --format table -o trivy-image-report.html aashishanil/boardshack:latest "
+                sh "trivy image --format table -o trivy-image-report.html misbahashim/bgame:latest "
             }
         }
         
@@ -83,14 +83,14 @@ pipeline {
             steps {
                script {
                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                            sh "docker push aashishanil/boardshack:latest"
+                            sh "docker push misbahashim/bgame:latest"
                     }
                }
             }
         }
         stage('Deploy board game') {
             steps {
-                sh 'docker run -d --rm -p 8081:8080 aashishanil/boardshack'
+                sh 'docker run -d --rm -p 8081:8080 misbahashim/bgame'
             }
         }
       
