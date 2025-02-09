@@ -37,5 +37,5 @@ jobs:
 
             - name: "Build Inventory Image"
               run: |
-                  docker build . --tag ${{ env.REGISTRY }}/MisbaHashimT/bgame:latest
-                  docker push ${{ env.REGISTRY }}/MisbaHashimT/bgame:latest
+                  docker build . --tag ${{ env.REGISTRY }}/misbahashimt/bgame:latest
+                  docker push ${{ env.REGISTRY }}/misbahashimt/bgame:latest
